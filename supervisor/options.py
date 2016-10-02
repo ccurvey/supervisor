@@ -1048,6 +1048,7 @@ class ServerOptions(Options):
             host, port = inet_address(port)
             config['host'] = host
             config['port'] = port
+            config['banner'] = get(section, 'banner', '')
             config['section'] = section
             configs.append(config)
 
@@ -1082,6 +1083,7 @@ class ServerOptions(Options):
                 chmod = 448 # 0700 on py2, 0o700 on py3
             config['chmod'] = chmod
             config['section'] = section
+            config['banner'] = banner
             configs.append(config)
 
         return configs

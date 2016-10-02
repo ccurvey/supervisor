@@ -490,6 +490,7 @@ class StatusView(MeldView):
         processnames.sort()
 
         data = []
+        
         for groupname, processname in processnames:
             actions = self.actions_for_process(
                 supervisord.process_groups[groupname].processes[processname])
@@ -510,6 +511,11 @@ class StatusView(MeldView):
             statusarea = root.findmeld('statusmessage')
             statusarea.attrib['class'] = 'status_msg'
             statusarea.content(message)
+            
+        # add the banner message
+        bannerarea = root.findmeld('banner')
+        bannerarea.content(
+            supervisord.options.server_configs[0].get('banner',''))
 
         if data:
             iterator = root.findmeld('tr').repeat(data)
